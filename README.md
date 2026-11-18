@@ -8,7 +8,7 @@
 <h1 align="center">Orrery website</h1>
 
 <p align="center">
-  The landing page for <a href="https://github.com/ForgeOrbit/orrery">Orrery</a>:
+  The landing page for <a href="https://github.com/forge-orbit/orrery">Orrery</a>:
   self-hosted project management for teams of humans and AI agents.
 </p>
 
@@ -20,11 +20,11 @@
 
 - **The landing page**: what Orrery is, who it's for, how it works, and how to self-host it.
 - **Later, the docs site**: product docs are written in the main repo under
-  [`docs/`](https://github.com/ForgeOrbit/orrery), next to the code they describe, and pulled in
+  [`docs/`](https://github.com/forge-orbit/orrery), next to the code they describe, and pulled in
   here at build time so the website has one place for both.
 
 The product code, roadmap and design discussions live in
-[ForgeOrbit/orrery](https://github.com/ForgeOrbit/orrery).
+[forge-orbit/orrery](https://github.com/forge-orbit/orrery).
 
 ## Develop
 
@@ -46,18 +46,18 @@ src/
   pages/index.astro      the landing page, one component per section
   components/            Header, Hero, Problem, HowItWorks, Features, Architecture,
                          SelfHosted, Roadmap, GetInvolved, Footer
-  data/site.ts           product copy and links to ForgeOrbit/orrery
+  data/site.ts           product copy and links to forge-orbit/orrery
   styles/global.css      design tokens (colors from the logo, type, spacing)
   content.config.ts      Starlight docs collection
 public/                  favicon and logo marks
-scripts/sync-docs.mjs    copies docs/ from ForgeOrbit/orrery before dev and build
+scripts/sync-docs.mjs    copies docs/ from forge-orbit/orrery before dev and build
 docs-placeholder/        docs shown until the main repo has a docs/ folder
 ```
 
 ## Docs
 
 The docs at `/docs/` are built with [Starlight](https://starlight.astro.build). The pages are not
-written here: they live in [ForgeOrbit/orrery](https://github.com/ForgeOrbit/orrery) under `docs/`,
+written here: they live in [forge-orbit/orrery](https://github.com/forge-orbit/orrery) under `docs/`,
 next to the code. Before every `dev` and `build`,
 [`scripts/sync-docs.mjs`](scripts/sync-docs.mjs) clones that folder and copies it to
 `src/content/docs/docs/` (generated, not committed). Plain GitHub-style Markdown works: a `# Heading`
@@ -69,14 +69,14 @@ While the main repo has no `docs/` folder, the site uses [`docs-placeholder/`](d
 | Variable | Use |
 | --- | --- |
 | `DOCS_SOURCE=../orrery` | Use a local checkout instead of cloning, to preview docs changes |
-| `DOCS_REPO`, `DOCS_REF` | Clone another repo or branch (default: ForgeOrbit/orrery, `main`) |
+| `DOCS_REPO`, `DOCS_REF` | Clone another repo or branch (default: forge-orbit/orrery, `main`) |
 
 On CI a failed clone fails the build, so a network problem can't publish the placeholder by mistake.
 
 ## Deploy
 
 Every push to `main` builds the site and publishes it to GitHub Pages at
-<https://forgeorbit.github.io/orrery-site/> (see
+<https://forge-orbit.github.io/orrery-site/> (see
 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). Pull requests build only. The
 workflow also listens for a `docs-updated` repository dispatch, so the main repo can trigger a
 rebuild when its docs change (not wired up yet).
