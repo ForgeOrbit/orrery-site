@@ -11,6 +11,7 @@ export const nav = [
   { label: 'Features', href: '#features' },
   { label: 'Self-hosted', href: '#self-hosted' },
   { label: 'Roadmap', href: '#roadmap' },
+  { label: 'Docs', href: 'docs/' },
 ];
 
 export const loop = [

@@ -1,6 +1,9 @@
 ---
 import { nav, repo } from '../data/site';
 import Mark from './Mark.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const link = (href: string) => (href.startsWith('#') ? href : `${base}/${href}`);
 ---
 
 <header class="header">
@@ -11,7 +14,7 @@ import Mark from './Mark.astro';
     </a>
     <nav aria-label="Sections">
       <ul>
-        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        {nav.map((item) => <li><a href={link(item.href)}>{item.label}</a></li>)}
       </ul>
     </nav>
     <div class="right">

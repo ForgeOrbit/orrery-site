@@ -1,6 +1,8 @@
 ---
 import { repo } from '../data/site';
 import Mark from './Mark.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <footer>
@@ -11,7 +13,7 @@ import Mark from './Mark.astro';
     </div>
     <ul>
       <li><a href={repo}>GitHub</a></li>
-      <li><span class="soon">Docs <span class="planned">Coming soon</span></span></li>
+      <li><a href={`${base}/docs/`}>Docs</a></li>
       <li><a href={`${repo}/blob/main/LICENSE`}>MIT license</a></li>
     </ul>
     <p>Built by <a href="https://github.com/ForgeOrbit">ForgeOrbit</a></p>
@@ -55,12 +57,6 @@ import Mark from './Mark.astro';
 
   a:hover {
     color: var(--text);
-  }
-
-  .soon {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
   }
 
   p {
