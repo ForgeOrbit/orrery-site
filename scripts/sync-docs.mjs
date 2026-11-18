@@ -11,6 +11,9 @@
 //   DOCS_REF     Branch or tag to clone. Default: main
 //   BASE_PATH    Same as astro.config.mjs. Used to rewrite links between docs pages.
 //
+// Folders under docs/ that are for contributors' tools, not readers, are never published (see
+// `internal` below).
+//
 // On CI (CI=true) a failed clone fails the build, so a network problem can't silently
 // publish the placeholder. A clone that works but has no docs/ falls back to the placeholder.
 
@@ -29,6 +32,11 @@ const ref = process.env.DOCS_REF ?? 'main';
 const base = (process.env.BASE_PATH ?? '/orrery-site').replace(/\/$/, '');
 const editBase = `https://github.com/forge-orbit/orrery/edit/${ref}/docs/`;
 const isMarkdown = (f) => /\.(md|mdx)$/i.test(f);
+
+// Top-level folders in docs/ that stay in the repo but never reach the website.
+// agents/: configuration that coding agents read (issue tracker, triage labels, domain docs).
+const internal = ['agents'];
+const isPublished = (rel) => !internal.includes(rel.split('/')[0]);
 
 function log(msg) {
   console.log(`[sync-docs] ${msg}`);
@@ -112,6 +120,7 @@ function adapt(text, rel) {
 function copyUpstream(src) {
   for (const file of walk(src)) {
     const rel = relative(src, file).split('\\').join('/');
+    if (!isPublished(rel)) continue;
     let destRel = rel.replace(/(^|\/)README\.md$/i, '$1index.md');
     const dest = join(out, destRel);
     mkdirSync(dirname(dest), { recursive: true });
