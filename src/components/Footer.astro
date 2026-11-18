@@ -62,4 +62,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   p {
     margin-left: auto;
   }
+
+  /* Once the row wraps, stack and center everything instead of leaving "Built by" stranded. */
+  @media (max-width: 720px) {
+    .inner {
+      flex-direction: column;
+      gap: 18px;
+      text-align: center;
+    }
+
+    ul {
+      justify-content: center;
+    }
+
+    p {
+      margin-left: 0;
+    }
+  }
 </style>
