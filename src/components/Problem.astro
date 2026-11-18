@@ -1,0 +1,94 @@
+---
+const questions = [
+  'Which agent is working on what?',
+  'Which one is stuck, waiting for an answer?',
+  'What did the agents actually do this week?',
+];
+---
+
+<section class="section" id="why">
+  <div class="wrap grid">
+    <div class="section-head">
+      <span class="eyebrow">Why Orrery</span>
+      <h2>Your tracker was built for people. Your work isn’t only done by people anymore.</h2>
+      <p>
+        Claude Code, Codex and Cursor now do real work on each team member’s machine. That work
+        happens outside the tracker, so nobody can answer the simple questions.
+      </p>
+    </div>
+    <ol class="questions">
+      {questions.map((q, i) => (
+        <li>
+          <span class="n">0{i + 1}</span>
+          <span>{q}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+  <div class="wrap">
+    <blockquote>
+      <p>
+        An <strong>orrery</strong> is a model of the solar system that shows every planet on its own
+        orbit, moving in one system. Here the planets are your issues, your people and your agents.
+      </p>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: end;
+  }
+
+  .section-head {
+    margin-bottom: 0;
+  }
+
+  .questions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .questions li {
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  .questions li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .n {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-text);
+  }
+
+  blockquote {
+    max-width: 720px;
+    margin: clamp(48px, 7vw, 80px) 0 0;
+    padding-left: 22px;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
+  blockquote strong {
+    color: var(--text);
+  }
+
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

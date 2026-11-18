@@ -1,0 +1,67 @@
+/* Starlight theme for the Orrery docs, matching the landing page.
+   Brand colors from the logo: ink #14161B, cream #F6F3EC, accent #F2561D. */
+@import '@fontsource/instrument-serif/400.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource/jetbrains-mono/400.css';
+
+:root {
+  --sl-font: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Dark theme (Starlight's default) */
+  --sl-color-accent-low: #3a1b10;
+  --sl-color-accent: #f2561d;
+  --sl-color-accent-high: #ffb898;
+  --sl-color-white: #f6f3ec;
+  --sl-color-gray-1: #e6e2d8;
+  --sl-color-gray-2: #c4c1b9;
+  --sl-color-gray-3: #a5a8af;
+  --sl-color-gray-4: #6b6e76;
+  --sl-color-gray-5: #3a3d45;
+  --sl-color-gray-6: #22252d;
+  --sl-color-black: #14161b;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #fde0d3;
+  --sl-color-accent: #c4430f;
+  --sl-color-accent-high: #6e2408;
+  --sl-color-white: #14161b;
+  --sl-color-gray-1: #22252d;
+  --sl-color-gray-2: #3a3d45;
+  --sl-color-gray-3: #5a5d65;
+  --sl-color-gray-4: #8d9099;
+  --sl-color-gray-5: #d6d2c8;
+  --sl-color-gray-6: #ece8de;
+  --sl-color-gray-7: #f2efe7;
+  --sl-color-black: #f6f3ec;
+}
+
+/* Instrument Serif for page titles and h2s, as on the landing page. */
+.content-panel h1,
+.sl-markdown-content h2 {
+  font-family: 'Instrument Serif', ui-serif, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.content-panel h1 {
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.sl-markdown-content h2 {
+  font-size: 2rem;
+}
+
+.site-title {
+  gap: 0.6rem;
+  color: var(--sl-color-white);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.site-title img {
+  height: 1.4rem;
+  width: auto;
+}

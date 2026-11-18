@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <style>.b{fill:#14161B}@media (prefers-color-scheme:dark){.b{fill:#F6F3EC}}</style>
+  <rect class="b" x="120" y="136" width="64" height="240" rx="32"/>
+  <rect class="b" x="224" y="136" width="64" height="160" rx="32"/>
+  <rect class="b" x="328" y="136" width="64" height="96" rx="32"/>
+  <circle cx="360" cy="304" r="32" fill="#F2561D"/>
+</svg>

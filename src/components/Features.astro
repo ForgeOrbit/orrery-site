@@ -1,0 +1,89 @@
+---
+import { features, issue } from '../data/site';
+---
+
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Planned for the MVP</span>
+      <h2>Familiar project management, with agents on the team.</h2>
+      <p>
+        Organizations, projects, issues, subtasks, labels and comments, and a board that runs Backlog →
+        Todo → In progress → Review → Done. On top of that:
+      </p>
+    </div>
+
+    <ul class="cards">
+      {
+        features.map((f) => (
+          <li>
+            <span class="planned">Planned</span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="foot">
+      Scope is still being decided. Follow the <a href={issue(8)}>MVP overview</a> or weigh in on
+      the <a href={issue(9)}>open product questions</a>.
+    </p>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  li {
+    padding: 28px 26px 32px;
+    background: var(--bg);
+    transition: background 0.2s ease;
+  }
+
+  li:hover {
+    background: var(--surface);
+  }
+
+  h3 {
+    margin-top: 18px;
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  li p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.97rem;
+  }
+
+  .foot {
+    margin-top: 28px;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 580px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,263 @@
+/* Orrery site: light-first "instrument" style.
+   Brand colors come from the logo: ink #14161B, cream #F6F3EC, accent #F2561D. */
+
+:root {
+  color-scheme: light dark;
+
+  --cream: #f6f3ec;
+  --ink: #14161b;
+  --orange: #f2561d;
+
+  --bg: var(--cream);
+  --surface: #fffdf8;
+  --surface-2: #efebe1;
+  --text: var(--ink);
+  --muted: #5a5d65;
+  --line: rgb(20 22 27 / 0.14);
+  --line-strong: rgb(20 22 27 / 0.28);
+  --accent: var(--orange);
+  /* Orange darkened for small text on cream (meets 4.5:1). */
+  --accent-text: #b13c0e;
+  --accent-soft: rgb(242 86 29 / 0.1);
+
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-body: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --radius: 14px;
+  --radius-pill: 999px;
+  --max: 1120px;
+  --gutter: clamp(20px, 5vw, 40px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--ink);
+    --surface: #1b1e24;
+    --surface-2: #22252d;
+    --text: var(--cream);
+    --muted: #a5a8af;
+    --line: rgb(246 243 236 / 0.13);
+    --line-strong: rgb(246 243 236 / 0.26);
+    --accent-text: #ff8152;
+    --accent-soft: rgb(242 86 29 / 0.16);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+}
+
+:not(pre) > code {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.35em;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+p {
+  margin: 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(72px, 10vw, 128px);
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.section-head h2 {
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+}
+
+.section-head p {
+  margin-top: 18px;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.planned {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  font-weight: 550;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.btn:hover {
+  border-color: var(--text);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--text) 86%, var(--accent));
+}
+
+.terminal {
+  margin: 0;
+  padding: 20px 22px;
+  overflow-x: auto;
+  background: #14161b;
+  color: #f6f3ec;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  line-height: 1.7;
+}
+
+.terminal .c {
+  color: #8d9099;
+}
+
+.terminal .p {
+  color: var(--orange);
+  user-select: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

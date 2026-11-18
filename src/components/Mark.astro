@@ -1,0 +1,20 @@
+---
+// The Orrery mark, inlined so it follows the color scheme (ink on cream, cream on ink).
+interface Props {
+  size?: number;
+}
+const { size = 28 } = Astro.props;
+---
+
+<svg
+  class="mark"
+  viewBox="112 128 288 256"
+  width={size}
+  height={Math.round((size * 256) / 288)}
+  aria-hidden="true"
+>
+  <rect x="120" y="136" width="64" height="240" rx="32" fill="currentColor"></rect>
+  <rect x="224" y="136" width="64" height="160" rx="32" fill="currentColor"></rect>
+  <rect x="328" y="136" width="64" height="96" rx="32" fill="currentColor"></rect>
+  <circle cx="360" cy="304" r="32" fill="#F2561D"></circle>
+</svg>
