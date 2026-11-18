@@ -1,8 +1,8 @@
 // All page copy that links to the main repo or describes planned features lives here,
-// so it can be kept in step with ForgeOrbit/orrery as decisions are made.
+// so it can be kept in step with forge-orbit/orrery as decisions are made.
 // Rule: nothing here is described as shipped. Orrery is in its design phase.
 
-export const repo = 'https://github.com/ForgeOrbit/orrery';
+export const repo = 'https://github.com/forge-orbit/orrery';
 export const issue = (n: number) => `${repo}/issues/${n}`;
 export const needDiscussion = `${repo}/labels/need%20discussion`;
 

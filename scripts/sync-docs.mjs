@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 // Pull the product docs into the site before dev and build.
 //
-// Product docs are written in ForgeOrbit/orrery under docs/, next to the code. This script
+// Product docs are written in forge-orbit/orrery under docs/, next to the code. This script
 // copies them to src/content/docs/docs/ so Starlight serves them at /docs/. If the main repo
 // has no docs/ folder yet, it copies docs-placeholder/ instead.
 //
 // Environment:
-//   DOCS_SOURCE  Path to a local checkout of ForgeOrbit/orrery. Skips the clone (handy in dev).
-//   DOCS_REPO    Git URL to clone. Default: https://github.com/ForgeOrbit/orrery.git
+//   DOCS_SOURCE  Path to a local checkout of forge-orbit/orrery. Skips the clone (handy in dev).
+//   DOCS_REPO    Git URL to clone. Default: https://github.com/forge-orbit/orrery.git
 //   DOCS_REF     Branch or tag to clone. Default: main
 //   BASE_PATH    Same as astro.config.mjs. Used to rewrite links between docs pages.
 //
@@ -24,10 +24,10 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'src/content/docs/docs');
 const placeholder = join(root, 'docs-placeholder');
 
-const repo = process.env.DOCS_REPO ?? 'https://github.com/ForgeOrbit/orrery.git';
+const repo = process.env.DOCS_REPO ?? 'https://github.com/forge-orbit/orrery.git';
 const ref = process.env.DOCS_REF ?? 'main';
 const base = (process.env.BASE_PATH ?? '/orrery-site').replace(/\/$/, '');
-const editBase = `https://github.com/ForgeOrbit/orrery/edit/${ref}/docs/`;
+const editBase = `https://github.com/forge-orbit/orrery/edit/${ref}/docs/`;
 const isMarkdown = (f) => /\.(md|mdx)$/i.test(f);
 
 function log(msg) {
@@ -77,7 +77,7 @@ function pageUrl(rel) {
  * Make a plain Markdown file from the main repo work as a Starlight page:
  * - README.md becomes the section index,
  * - a missing `title` comes from the first "# Heading",
- * - "Edit page" points at the file in ForgeOrbit/orrery,
+ * - "Edit page" points at the file in forge-orbit/orrery,
  * - relative links to other .md files point at their pages.
  */
 function adapt(text, rel) {

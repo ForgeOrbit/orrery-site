@@ -2,10 +2,10 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// Served from GitHub Pages as a project page: https://forgeorbit.github.io/orrery-site/
+// Served from GitHub Pages as a project page: https://forge-orbit.github.io/orrery-site/
 // When the site moves to a custom domain, set SITE_URL to it and BASE_PATH to "/".
 export default defineConfig({
-  site: process.env.SITE_URL ?? 'https://forgeorbit.github.io',
+  site: process.env.SITE_URL ?? 'https://forge-orbit.github.io',
   base: process.env.BASE_PATH ?? '/orrery-site',
   trailingSlash: 'ignore',
   integrations: [
@@ -17,10 +17,10 @@ export default defineConfig({
         dark: './src/assets/orrery-mark-dark.svg',
       },
       favicon: '/favicon.svg',
-      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ForgeOrbit/orrery' }],
+      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/forge-orbit/orrery' }],
       customCss: ['./src/styles/docs.css'],
       sidebar: [{ autogenerate: { directory: 'docs' } }],
-      // Pages are copied from ForgeOrbit/orrery, so this repo's git dates would be wrong.
+      // Pages are copied from forge-orbit/orrery, so this repo's git dates would be wrong.
       lastUpdated: false,
       pagination: true,
     }),

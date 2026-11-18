@@ -7,10 +7,10 @@ sidebar:
 ---
 
 Orrery's docs are written in the main repo,
-[ForgeOrbit/orrery](https://github.com/ForgeOrbit/orrery), in a `docs/` folder. They change in the
+[forge-orbit/orrery](https://github.com/forge-orbit/orrery), in a `docs/` folder. They change in the
 same pull request as the code they describe, so a released version and its docs always match.
 
-The website ([ForgeOrbit/orrery-site](https://github.com/ForgeOrbit/orrery-site)) copies that
+The website ([forge-orbit/orrery-site](https://github.com/forge-orbit/orrery-site)) copies that
 folder when it builds. You don't need to touch the website to change the docs.
 
 ## Conventions
