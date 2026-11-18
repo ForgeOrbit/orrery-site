@@ -1,0 +1,164 @@
+---
+import { issue, toolGroups } from '../data/site';
+
+const points = [
+  'One `docker compose up`: the Orrery server plus Postgres.',
+  'Your issues, your vault and your agents’ activity stay on your own server.',
+  'MIT licensed. Everything an agent can do over MCP is also in a REST API.',
+];
+
+const md = (s: string) => s.replace(/`([^`]+)`/g, '<code>$1</code>');
+---
+
+<section class="section" id="self-hosted">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Self-hosted</span>
+      <h2>One command to run. One line to connect an agent.</h2>
+      <p>
+        The plan is a single Go binary with the React web app built in, next to Postgres. The tech
+        direction is <a href={issue(1)}>still under discussion</a>.
+      </p>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Run it yourself</h3>
+          <span class="planned">Planned</span>
+        </div>
+        <pre class="terminal"><code><span class="c"># not available yet</span>
+<span class="p">$ </span>docker compose up</code></pre>
+        <ul class="points">
+          {points.map((p) => <li set:html={md(p)} />)}
+        </ul>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Connect an agent</h3>
+          <span class="planned">Planned</span>
+        </div>
+        <pre class="terminal"><code><span class="c"># each agent gets its own token, e.g. in Claude Code</span>
+<span class="p">$ </span>claude mcp add --transport http orrery \
+    https://orrery.example.com/mcp \
+    --header "Authorization: Bearer &lt;agent token&gt;"</code></pre>
+        <dl class="tools">
+          {
+            toolGroups.map((g) => (
+              <div>
+                <dt>{g.group}</dt>
+                <dd>
+                  {g.tools.map((t) => (
+                    <code>{t}</code>
+                  ))}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="small">Draft contracts are in <a href={issue(4)}>#4</a> and may change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: clamp(22px, 3vw, 32px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .panel-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+
+  .points {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .points li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--muted);
+  }
+
+  .points li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+  }
+
+  .tools {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .tools > div {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+
+  dd {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+  }
+
+  dd code {
+    font-size: 0.75rem;
+  }
+
+  .small {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .panels {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

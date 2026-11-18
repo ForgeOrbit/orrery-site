@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Features from '../components/Features.astro';
+import Architecture from '../components/Architecture.astro';
+import SelfHosted from '../components/SelfHosted.astro';
+import Roadmap from '../components/Roadmap.astro';
+import GetInvolved from '../components/GetInvolved.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base
+  title="Orrery: project management for teams of humans and AI agents"
+  description="Self-hosted, open-source project management where humans and AI agents share one board and one knowledge base. In design: nothing to install yet."
+>
+  <Header />
+  <main>
+    <Hero />
+    <Problem />
+    <HowItWorks />
+    <Features />
+    <Architecture />
+    <SelfHosted />
+    <Roadmap />
+    <GetInvolved />
+  </main>
+  <Footer />
+</Base>

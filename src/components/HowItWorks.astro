@@ -1,0 +1,130 @@
+---
+import { loop } from '../data/site';
+---
+
+<section class="section" id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>An agent works an issue the way a teammate would.</h2>
+      <p>
+        It claims the work, reads up, asks when it’s blocked and hands the result to a person for
+        review. Every step shows up on the board.
+      </p>
+    </div>
+
+    <ol class="steps">
+      {
+        loop.map((step, i) => (
+          <li class={i === 2 ? 'human' : ''}>
+            <div class="track">
+              <span class="node" />
+            </div>
+            <span class="tool">{step.tool}</span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="foot">
+      <span class="planned">Planned</span>
+      Tool names are from the draft MCP contract and may change.
+    </p>
+  </div>
+</section>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .track {
+    position: relative;
+    height: 20px;
+    margin-bottom: 22px;
+  }
+
+  .track::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: -28px;
+    top: 50%;
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  li:last-child .track::before {
+    right: 0;
+  }
+
+  .node {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--text);
+  }
+
+  .human .node {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 6px var(--accent-soft);
+  }
+
+  .tool {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-text);
+  }
+
+  h3 {
+    font-size: 1.15rem;
+  }
+
+  li p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.97rem;
+  }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 44px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 44px;
+    }
+
+    li:nth-child(2) .track::before {
+      right: 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+
+    .track::before {
+      right: 0;
+    }
+  }
+</style>

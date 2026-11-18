@@ -1,0 +1,130 @@
+---
+import { issue, needDiscussion, repo } from '../data/site';
+import Mark from './Mark.astro';
+
+const links = [
+  { title: 'MVP overview', detail: 'What’s in, what’s out, and why.', href: issue(8) },
+  { title: 'Product questions', detail: 'The open calls we need opinions on.', href: issue(9) },
+  { title: 'Anything labeled need discussion', detail: 'Pick a thread and weigh in.', href: needDiscussion },
+];
+---
+
+<section class="section" id="get-involved">
+  <div class="wrap">
+    <div class="box">
+      <div class="copy">
+        <Mark size={44} />
+        <h2>Help shape Orrery before it’s built.</h2>
+        <p>
+          The best way to help right now is to join the discussion. Watch the repo on GitHub to hear
+          when there’s something to run.
+        </p>
+        <div class="ctas">
+          <a class="btn btn-primary" href={repo}>Watch on GitHub</a>
+        </div>
+      </div>
+      <ul class="links">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href}>
+                <span class="t">{l.title}</span>
+                <span class="d">{l.detail}</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .box {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 72px);
+    padding: clamp(32px, 6vw, 64px);
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 28px;
+  }
+
+  .box :global(.mark) {
+    color: var(--bg);
+  }
+
+  h2 {
+    margin-top: 28px;
+    font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+  }
+
+  .copy p {
+    margin-top: 18px;
+    opacity: 0.75;
+  }
+
+  .ctas {
+    margin-top: 30px;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: #ff6a33;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--bg) 18%, transparent);
+    text-decoration: none;
+  }
+
+  .links li:first-child a {
+    border-top: 1px solid color-mix(in srgb, var(--bg) 18%, transparent);
+  }
+
+  .t {
+    font-weight: 600;
+  }
+
+  .d {
+    grid-row: 2;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .arrow {
+    grid-row: 1 / span 2;
+    align-self: center;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  .links a:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 860px) {
+    .box {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

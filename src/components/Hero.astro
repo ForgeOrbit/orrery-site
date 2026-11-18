@@ -1,0 +1,423 @@
+---
+import { issue, repo } from '../data/site';
+
+// A concept sketch of the board. It is illustrative only and labeled as such on the page.
+const columns = [
+  {
+    name: 'Todo',
+    cards: [{ key: 'ORR-51', title: 'Export issues as CSV', who: null }],
+  },
+  {
+    name: 'In progress',
+    cards: [
+      {
+        key: 'ORR-42',
+        title: 'Rate-limit the import API',
+        who: { kind: 'agent', name: 'claude-code', owner: 'maya' },
+        note: 'Writing tests · 2m ago',
+      },
+      {
+        key: 'ORR-38',
+        title: 'Draft the onboarding emails',
+        who: { kind: 'human', name: 'Sam' },
+      },
+    ],
+  },
+  {
+    name: 'Review',
+    cards: [
+      {
+        key: 'ORR-35',
+        title: 'Move settings to the new form',
+        who: { kind: 'agent', name: 'codex', owner: 'ari' },
+        note: 'Submitted for review',
+      },
+    ],
+  },
+] as const;
+---
+
+<section class="hero" id="top">
+  <svg class="orbits" viewBox="0 0 800 800" aria-hidden="true">
+    <circle cx="400" cy="400" r="150"></circle>
+    <circle cx="400" cy="400" r="250"></circle>
+    <circle cx="400" cy="400" r="360"></circle>
+    <g class="spin s1"><circle class="planet" cx="550" cy="400" r="6"></circle></g>
+    <g class="spin s2"><circle class="planet accent" cx="400" cy="150" r="8"></circle></g>
+    <g class="spin s3"><circle class="planet" cx="40" cy="400" r="5"></circle></g>
+  </svg>
+
+  <div class="wrap grid">
+    <div class="copy">
+      <p class="note">
+        <span>In design. Nothing to install yet.</span>
+        <a href={issue(8)}>Read the MVP plan →</a>
+      </p>
+      <h1>Project management for teams of humans <em>and</em> AI&nbsp;agents.</h1>
+      <p class="lede">
+        One board for everyone doing the work, plus a shared knowledge base your agents can read and
+        write. Self-hosted, open source, and built around the agents your team already runs.
+      </p>
+      <div class="ctas">
+        <a class="btn btn-primary" href={repo}>Follow on GitHub</a>
+        <a class="btn" href={issue(8)}>Join the discussion</a>
+      </div>
+    </div>
+
+    <figure class="sketch">
+      <div class="board" role="img" aria-label="Concept sketch of an Orrery board where humans and agents share issues across Todo, In progress and Review.">
+        {
+          columns.map((col) => (
+            <div class="col">
+              <div class="col-head">
+                <span>{col.name}</span>
+                <span class="count">{col.cards.length}</span>
+              </div>
+              {col.cards.map((card) => (
+                <div class="card">
+                  <div class="key">{card.key}</div>
+                  <div class="title">{card.title}</div>
+                  {card.who ? (
+                    <div class={`who ${card.who.kind}`}>
+                      <span class="avatar" />
+                      {card.who.kind === 'agent' ? (
+                        <span>
+                          {card.who.name}
+                          <span class="owner">{card.who.owner}’s agent</span>
+                        </span>
+                      ) : (
+                        <span>{card.who.name}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <div class="who empty">Unassigned</div>
+                  )}
+                  {'note' in card && card.note && <div class="progress">{card.note}</div>}
+                </div>
+              ))}
+            </div>
+          ))
+        }
+        <div class="ask" aria-hidden="true">
+          <div class="ask-head"><span class="dot"></span> Needs input · ORR-42</div>
+          <p>Keep the old import endpoint for one more release, or remove it now?</p>
+          <div class="ask-actions"><span>Answer</span></div>
+        </div>
+      </div>
+      <figcaption>Concept sketch, not a product screenshot.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(56px, 9vw, 112px) clamp(64px, 9vw, 112px);
+  }
+
+  .orbits {
+    position: absolute;
+    width: 900px;
+    right: -260px;
+    top: -170px;
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+    pointer-events: none;
+  }
+
+  .planet {
+    fill: var(--text);
+    stroke: none;
+    opacity: 0.6;
+  }
+
+  .planet.accent {
+    fill: var(--accent);
+    opacity: 1;
+  }
+
+  .spin {
+    transform-origin: 400px 400px;
+    animation: orbit linear infinite;
+  }
+
+  .s1 {
+    animation-duration: 38s;
+  }
+
+  .s2 {
+    animation-duration: 70s;
+  }
+
+  .s3 {
+    animation-duration: 120s;
+    animation-direction: reverse;
+  }
+
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 72px);
+    align-items: center;
+  }
+
+  .note {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-bottom: 28px;
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .note a {
+    color: var(--accent-text);
+    text-decoration: none;
+    font-weight: 550;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 6.4vw, 4.9rem);
+    line-height: 1;
+  }
+
+  h1 em {
+    color: var(--accent);
+  }
+
+  .lede {
+    max-width: 34em;
+    margin-top: 24px;
+    font-size: 1.15rem;
+    color: var(--muted);
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .sketch {
+    margin: 0;
+  }
+
+  .board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow:
+      0 1px 0 var(--line),
+      0 30px 60px -30px rgb(20 22 27 / 0.25);
+    font-size: 0.78rem;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 260px;
+    padding: 10px;
+    background: var(--surface-2);
+    border-radius: 12px;
+  }
+
+  .col-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 4px 4px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .count {
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+
+  .card {
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  .key {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  .title {
+    margin-top: 2px;
+    font-weight: 550;
+    line-height: 1.3;
+  }
+
+  .who {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 8px;
+    color: var(--muted);
+  }
+
+  .who.empty {
+    font-style: italic;
+  }
+
+  .avatar {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--text);
+    opacity: 0.75;
+  }
+
+  .who.agent .avatar {
+    background: var(--accent);
+    opacity: 1;
+    border-radius: 4px;
+  }
+
+  .who.agent {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text);
+  }
+
+  .owner {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  .progress {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .ask {
+    position: absolute;
+    top: 232px;
+    right: -36px;
+    width: min(210px, 46%);
+    padding: 12px 14px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px -18px rgb(20 22 27 / 0.5);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .ask-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .ask p {
+    margin-top: 6px;
+    line-height: 1.35;
+  }
+
+  .ask-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .ask-actions span {
+    padding: 3px 12px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+  }
+
+  figcaption {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  @keyframes float {
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (max-width: 920px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .orbits {
+      right: -420px;
+      opacity: 0.7;
+    }
+
+    .ask {
+      right: -8px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .board {
+      grid-template-columns: 1fr;
+    }
+
+    .col {
+      min-height: 0;
+    }
+
+    .ask {
+      position: relative;
+      top: auto;
+      right: auto;
+      width: auto;
+      margin-top: 4px;
+    }
+
+    figcaption {
+      margin-top: 14px;
+    }
+  }
+</style>
